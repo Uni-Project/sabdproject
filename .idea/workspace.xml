@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="06157e0e-64c1-4341-81f2-b531e8ab8f3d" name="Default Changelist" comment="" />
+    <list default="true" id="06157e0e-64c1-4341-81f2-b531e8ab8f3d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/humidity/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/humidity/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/humidity/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/humidity/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/pressure/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/pressure/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/pressure/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/pressure/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/temperature/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/temperature/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/temperature/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/temperature/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/weather_description/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/weather_description/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/weather_description/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreprocOutput/weather_description/part-00000" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/queries/Query1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-76">
+            <state relative-caret-position="30">
               <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -39,7 +56,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/queries/Query3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
+            <state relative-caret-position="240">
               <caret line="27" selection-start-line="27" selection-end-line="27" />
             </state>
           </provider>
@@ -56,6 +73,9 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -77,18 +97,17 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="3197" />
+    <option name="x" value="3200" />
     <option name="y" value="-412" />
     <option name="width" value="1366" />
     <option name="height" value="745" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -96,16 +115,61 @@
               <item name="sabdproject" type="b2602c69:ProjectViewProjectNode" />
               <item name="sabdproject" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sabdproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sabdproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sabdproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sabdproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sabdproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sabdproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sabdproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sabdproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="preprocessing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sabdproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sabdproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="queries" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sabdproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sabdproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -180,16 +244,17 @@
       <updated>1558472729826</updated>
       <workItem from="1558472733839" duration="340000" />
       <workItem from="1558518468651" duration="7520000" />
+      <workItem from="1558553131203" duration="418000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7860000" />
+    <option name="totallyTimeSpent" value="8278000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3200" y="-412" width="1366" height="745" extended-state="6" />
+    <frame x="3197" y="-412" width="1366" height="745" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22205438" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22507553" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -252,32 +317,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PreprocOutput/city_attributes/part-00000">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/part-00000">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PreprocOutput/city_attributes/part-00000-66850423-0c71-4bbd-86b0-2f6bbe6e0c5e-c000.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PreprocOutput/city_attributes/part-00000-b11f10b8-4a3c-4dbc-8d59-53af3b043fd0-c000.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/PreprocOutput/city_attributes/part-00000" />
+    <entry file="file://$PROJECT_DIR$/test/part-00000" />
+    <entry file="file://$PROJECT_DIR$/PreprocOutput/city_attributes/part-00000-66850423-0c71-4bbd-86b0-2f6bbe6e0c5e-c000.csv" />
+    <entry file="file://$PROJECT_DIR$/PreprocOutput/city_attributes/part-00000-b11f10b8-4a3c-4dbc-8d59-53af3b043fd0-c000.csv" />
     <entry file="file://$PROJECT_DIR$/PreprocOutput/humidity/part-00000">
       <provider selected="true" editor-type-id="LargeFileEditor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/eeee/part-00000">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/eeee/part-00000" />
     <entry file="file://$PROJECT_DIR$/src/main/java/utils/Detection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="568">
@@ -294,9 +341,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eeeeqqqqq/part-00000">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/eeeeqqqqq/part-00000" />
     <entry file="file://$PROJECT_DIR$/src/main/java/utils/DetectionParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -344,7 +389,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/queries/Query1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-76">
+        <state relative-caret-position="30">
           <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -361,7 +406,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/queries/Query3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
+        <state relative-caret-position="240">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 docker network create --driver bridge spark_network
 
 docker run -t -i -p 50075:50075 -d --network=spark_network --name=slave1 sparkimg
