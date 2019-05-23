@@ -59,7 +59,7 @@ public class Query2 {
 
 
                 for (int i=0; i<files.length; i++)
-                    RDDs.get(i).saveAsTextFile("hdfs://master:54310/query2_raw");
+                    RDDs.get(i).coalesce(1).saveAsTextFile("hdfs://master:54310/query2_raw");
 
 
         spark.stop();
