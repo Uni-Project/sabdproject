@@ -14,8 +14,8 @@ public class Preprocess {
     public static void main(String[] args) {
 
         String regexPattern = "\\.(?=[^\\.]+$)";
-        String outputhFolder = "PreprocOutput";
-        String inputFolder = "/Users/simone/Projects/proj/src/main/java/data/querydataset/";
+        String outputhFolder = "hdfs://master:54310/PreProcessed";
+        String inputFolder = "hdfs://master:54310/dataset";
         File[] files = FileUtils.checkFileNames(inputFolder);
         if (files.length == 0) return; //exit if there isn't files
 

@@ -22,14 +22,13 @@ public class Query3 {
                 .setAppName("Hello World");
         JavaSparkContext spark = new JavaSparkContext(conf);
 
-        Long start = System.currentTimeMillis();
 
-        JavaPairRDD<String,  Tuple2<String, Integer>> attributes = spark.textFile("/home/angela/IdeaProjects/proj/src/main/java/data/city_attributes.csv")
+        JavaPairRDD<String,  Tuple2<String, Integer>> attributes = spark.textFile("hdfs://master:54310/attributes/city_attributes.csv")
                 .map(line -> AttributesParser.parse(line))
                 .mapToPair(city -> new Tuple2<>(city.getCity(), new Tuple2<>(city.getCountry(), city.getUtc())))
                 .cache();
 
-        spark.textFile("/home/angela/IdeaProjects/proj/PreprocOutput/temperature/part-00000")
+        spark.textFile("hdfs://master:54310/PreProcessed/temperature/part-00000")
                 .map(line -> DetectionParser.parse(line))
                 .filter(x -> x.getYear() >= 2016 || x.getYear() <= 2017 &&
                         (x.getMonth() >= 1 && x.getMonth() <= 4) &&
@@ -80,12 +79,7 @@ public class Query3 {
                     else index = getIndex(t2._2, t1._2);
                     return new Tuple2<>(index, t1._2);
                 })
-                .coalesce(1).saveAsTextFile("output_query3");
-
-        Long fine = (System.currentTimeMillis() - start)/1000;
-        System.out.println("FINE: " + fine);
-
-        //Thread.sleep(200000);
+                .coalesce(1).saveAsTextFile("query3_raw");
 
         spark.stop();
 

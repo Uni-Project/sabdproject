@@ -17,7 +17,7 @@ public class Query1 {
                 .setAppName("Hello World");
         JavaSparkContext spark = new JavaSparkContext(conf);
 
-        spark.textFile("/Users/simone/Projects/sabdproject/PreprocOutput/weather_description/part-00000")
+        spark.textFile("hdfs://master:54310/PreProcessed/weather_description/part-00000")
                 .map(line -> DetectionParser.parse(line))
                 .filter(detection -> detection.getMonth() == 3 ||
                                         detection.getMonth() == 4 ||
@@ -26,7 +26,7 @@ public class Query1 {
                 .mapToPair(tuple -> new Tuple2<>(new Tuple4<>(tuple.getYear(), tuple.getMonth(), tuple.getDay(), tuple.getCity()), 1))
                 .reduceByKey((tuple1, tuple2) -> tuple1+tuple2)
                 .filter(days -> days._2 == 3)
-                .coalesce(1).saveAsTextFile("eeeeqqqqq");
+                .coalesce(1).saveAsTextFile("hdfs://master:54310/query1_raw");
 
         spark.stop();
 

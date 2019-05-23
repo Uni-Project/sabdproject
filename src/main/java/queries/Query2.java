@@ -23,17 +23,17 @@ public class Query2 {
                 .setAppName("Hello World");
         JavaSparkContext spark = new JavaSparkContext(conf);
 
-        String[] files = {"/Users/simone/Projects/proj/output/humidity/part-00000-ddee555c-7eb1-404f-8aea-abb4334729ba-c000.csv",
-                "/Users/simone/Projects/proj/output/temperature/part-00000-0166f75b-28c0-46bf-aa28-e7247e50a050-c000.csv",
-                "/Users/simone/Projects/proj/output/pressure/part-00000-20bd0dda-a914-4392-8518-bd94b83305ac-c000.csv"};
+        String[] files = {  "hdfs://master:54310/PreProcessed/humidity/part-00000",
+                            "hdfs://master:54310/PreProcessed/temperature/part-00000",
+                            "hdfs://master:54310/PreProcessed/pressure/part-00000"};
 
         List<JavaPairRDD<Tuple3<String, Integer, Integer>, Tuple4<Double, Double, Double, Double>>> RDDs = new ArrayList<>();
 
-        JavaPairRDD<String,  String> attributes = spark.textFile("output/humidity/city_attributes.csv")
+        JavaPairRDD<String,  String> attributes = spark.textFile("hdfs://master:54310/attributes/city_attributes.csv")
                 .map(line -> AttributesParser.parse(line))
-                .mapToPair(city -> new Tuple2<>(city.getCity(), city.getCountry()));
+                .mapToPair(city -> new Tuple2<>(city.getCity(), city.getCountry()))
+                .cache();
 
-        Long start = System.currentTimeMillis();
 
                 for (int i=0; i< files.length; i++) {
 
@@ -53,18 +53,14 @@ public class Query2 {
                                 Double min = tuple._2._5();
                                 return new Tuple2<>(new Tuple3<>(tuple._1._1(), tuple._1._2(), tuple._1._3()), new Tuple4<>(mean, std, min, max));
                             })
-                            .reduceByKey((tuple1, tuple2) -> new Tuple4<>(tuple1._1() + tuple2._1(), tuple1._2() + tuple2._2(), tuple2._3(), tuple2._4())));
+                            .reduceByKey((tuple1, tuple2) -> new Tuple4<>(tuple1._1() + tuple2._1(), tuple1._2() + tuple2._2(), tuple2._3(), tuple2._4()))
+                            .cache());
                 }
-
-                Long mezzo = (System.currentTimeMillis() - start)/1000;
 
 
                 for (int i=0; i<files.length; i++)
-                    RDDs.get(i).saveAsTextFile("out_" + i);
+                    RDDs.get(i).saveAsTextFile("hdfs://master:54310/query2_raw");
 
-                Long fine = (System.currentTimeMillis() - start)/1000;
-
-                System.out.println("MEZZO -> " + mezzo +"\nFINE --> " + fine);
 
         spark.stop();
 
