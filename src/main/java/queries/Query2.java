@@ -20,7 +20,7 @@ public class Query2 {
 
         SparkConf conf = new SparkConf()
                 .setMaster("local")
-                .setAppName("Hello World");
+                .setAppName("Query2");
         JavaSparkContext spark = new JavaSparkContext(conf);
 
         String[] files = {  "hdfs://master:54310/PreProcessed/humidity/part-00000",

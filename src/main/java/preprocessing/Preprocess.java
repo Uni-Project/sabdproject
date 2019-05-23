@@ -7,7 +7,6 @@ import org.apache.spark.sql.functions;
 import utils.FileUtils;
 import utils.Validation;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,6 @@ public class Preprocess {
 
         String regexPattern = "\\.(?=[^\\.]+$)";
         String outputhFolder = "hdfs://master:54310/PreProcessed";
-        String inputFolder = "hdfs://master:54310/dataset";
 
         //old code...it was a porting from local files to hdfs files
         //-------------------------------------------------------

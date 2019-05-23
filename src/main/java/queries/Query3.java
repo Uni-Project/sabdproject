@@ -19,7 +19,7 @@ public class Query3 {
 
         SparkConf conf = new SparkConf()
                 .setMaster("local")
-                .setAppName("Hello World");
+                .setAppName("Query3");
         JavaSparkContext spark = new JavaSparkContext(conf);
 
 

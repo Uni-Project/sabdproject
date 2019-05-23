@@ -14,7 +14,7 @@ public class Query1 {
 
         SparkConf conf = new SparkConf()
                 .setMaster("local")
-                .setAppName("Hello World");
+                .setAppName("Query1");
         JavaSparkContext spark = new JavaSparkContext(conf);
 
         spark.textFile("hdfs://master:54310/PreProcessed/weather_description/part-00000")
