@@ -4,10 +4,28 @@ import java.io.File;
 import java.io.IOException;
 
 public class FileUtils {
+    private String name;
+    private String path;
 
-    public static File[] checkFileNames(String path) {
-        File dir = new File(path);
-        return dir.listFiles((d, name) -> name.endsWith(".csv"));
+    public FileUtils(String name, String path) {
+        this.name = name;
+        this.path = path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public static void renameFile(File toBeRenamed, String new_name)
