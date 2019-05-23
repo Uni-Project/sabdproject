@@ -22,10 +22,12 @@ public class Query3 {
                 .setAppName("Hello World");
         JavaSparkContext spark = new JavaSparkContext(conf);
 
+        Long start = System.currentTimeMillis();
+
         JavaPairRDD<String,  Tuple2<String, Integer>> attributes = spark.textFile("/home/angela/IdeaProjects/proj/src/main/java/data/city_attributes.csv")
                 .map(line -> AttributesParser.parse(line))
-                .mapToPair(city -> new Tuple2<>(city.getCity(), new Tuple2<>(city.getCountry(), city.getUtc())));
-
+                .mapToPair(city -> new Tuple2<>(city.getCity(), new Tuple2<>(city.getCountry(), city.getUtc())))
+                .cache();
 
         spark.textFile("/home/angela/IdeaProjects/proj/PreprocOutput/temperature/part-00000")
                 .map(line -> DetectionParser.parse(line))
@@ -63,15 +65,45 @@ public class Query3 {
                             return -1;
                         }
                     });
-                    Tuple2<String, Double> max1, max2, max3;
-                    max1 = list.get(0);
-                    max2 = list.get(1);
-                    max3 = list.get(2);
-                    return new Tuple2(x._1, new Tuple3<>(max1, max2, max3));
+                    return new Tuple2<>(x._1, list);
                 })
-                .coalesce(1).saveAsTextFile("superTOP3");
+                .mapToPair(x -> {
+                    List<Integer> year = new ArrayList<>();
+                    year.add(x._1._2);
+                    return new Tuple2<>(x._1._1, new Tuple2<>(year, x._2));
+                })
+                .reduceByKey((t1, t2) -> {
+                    List<Integer> index = new ArrayList<>();
+                    if(t1._1.get(0) == 2017) {
+                        index = getIndex(t1._2, t2._2);
+                    }
+                    else index = getIndex(t2._2, t1._2);
+                    return new Tuple2<>(index, t1._2);
+                })
+                .coalesce(1).saveAsTextFile("output_query3");
+
+        Long fine = (System.currentTimeMillis() - start)/1000;
+        System.out.println("FINE: " + fine);
+
+        //Thread.sleep(200000);
 
         spark.stop();
 
+    }
+
+    public static List<Integer> getIndex(List<Tuple2<String, Double>> l1, List<Tuple2<String, Double>> l2){
+
+        List<Integer> indici = new ArrayList<Integer>();
+        for(int i = 0; i <= 3; i++) {
+            Tuple2<String, Double> t1 = l1.get(i);
+            for(int j = 0; j < l2.size(); j++) {
+                Tuple2<String, Double> t2 = l2.get(j);
+                if(t1._1.equals(t2._1)) {
+                    indici.add(l2.indexOf(t2));
+                    System.out.println(indici);
+                }
+            }
+        }
+        return indici;
     }
 }
