@@ -1,15 +1,17 @@
 package queries;
 
+import com.google.gson.Gson;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import scala.Tuple2;
-import scala.Tuple3;
-import scala.Tuple4;
-import scala.Tuple5;
+import scala.*;
+import spire.random.rng.Serial;
 import utils.AttributesParser;
 import utils.DetectionParser;
+import utils.HDFSWriter;
 
+import java.io.Serializable;
+import java.lang.Double;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,10 @@ public class Query2 {
                 .setAppName("Query2");
         JavaSparkContext spark = new JavaSparkContext(conf);
 
-        String[] files = {  "hdfs://master:54310/PreProcessed/humidity/part-00000",
-                            "hdfs://master:54310/PreProcessed/temperature/part-00000",
-                            "hdfs://master:54310/PreProcessed/pressure/part-00000"};
+        String[] files = {  "hdfs://master:54310/PreProcessed/humidity/part-00000",   //1 == humidity
+                            "hdfs://master:54310/PreProcessed/temperature/part-00000",//2 == temperature
+                            "hdfs://master:54310/PreProcessed/pressure/part-00000"};  //3 == pressure
+        String[] fileName = {"humidity", "temperature", "pressure"};
 
         List<JavaPairRDD<Tuple3<String, Integer, Integer>, Tuple4<Double, Double, Double, Double>>> RDDs = new ArrayList<>();
 
@@ -58,12 +61,52 @@ public class Query2 {
                 }
 
 
-                for (int i=0; i<files.length; i++)
-                    RDDs.get(i).coalesce(1).saveAsTextFile("hdfs://master:54310/query2_raw");
+                for (int k=0; k<files.length; k++)
+                    RDDs.get(k).coalesce(1).saveAsTextFile("hdfs://master:54310/query2_raw");
 
+
+                long id = 1;
+                List<Query2Result> results = new ArrayList<>();
+
+                for (int i=0; i<RDDs.size(); i++) {
+                    for (Tuple2<Tuple3<String, Integer, Integer>, Tuple4<Double, Double, Double, Double>> row : RDDs.get(i).collect()) {
+                        Query2Result res = new Query2Result(id, row._1._1(), row._1._2(), row._1._3(), row._2._4(), row._2._3(), row._2._1(), row._2._1());
+                        results.add(res);
+                        id++;
+                    }
+
+                    Gson jsonResult = new Gson();
+                    HDFSWriter.write(jsonResult.toJson(results), "hdfs://master:54310/query2/" + fileName[i] + ".json");
+
+                    id = 1;
+                }
 
         spark.stop();
 
+    }
+
+    private static class Query2Result implements Serializable {
+        private long id;
+
+        private String nation;
+        private int year;
+        private int month;
+
+        private double max;
+        private double min;
+        private double stdev;
+        private double mean;
+
+        public Query2Result(long id, String nation, int year, int month, double max, double min, double stdev, double mean) {
+            this.id = id;
+            this.nation = nation;
+            this.year = year;
+            this.month = month;
+            this.max = max;
+            this.min = min;
+            this.stdev = stdev;
+            this.mean = mean;
+        }
     }
 
 }
