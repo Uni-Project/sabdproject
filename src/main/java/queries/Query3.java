@@ -1,5 +1,6 @@
 package queries;
 
+import com.google.gson.Gson;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -8,6 +9,7 @@ import scala.Tuple3;
 import scala.Tuple4;
 import utils.AttributesParser;
 import utils.DetectionParser;
+import utils.HDFSWriter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -88,6 +90,19 @@ public class Query3 {
         query3.coalesce(1).saveAsTextFile("hdfs://master:54310/query3_raw");
 
 
+        long id = 1;
+        List<Query3Result> results = new ArrayList<>();
+        List<Tuple2<String, Tuple2<List<Integer>, List<Tuple2<String, Double>>>>> query3Listed = query3.collect();
+        for (Tuple2<String, Tuple2<List<Integer>, List<Tuple2<String, Double>>>> row : query3Listed) {
+            for (int i=0; i<=row._2._2.size(); i++) {
+                Query3Result res = new Query3Result(id, row._2._1.get(i), i, row._1, row._2._2.get(i)._1, row._2._2.get(i)._2);
+                results.add(res);
+                id++;
+            }
+        }
+        Gson jsonResult = new Gson();
+        HDFSWriter.write(jsonResult.toJson(results), "hdfs://master:54310/query3.json");
+
 
         spark.stop();
 
@@ -109,9 +124,22 @@ public class Query3 {
         return indici;
     }
 
-    private class Query3Result implements Serializable {
+    private static class Query3Result implements Serializable {
         private long id;
 
+        private int position2016;
+        private int position2017;
+        private String country;
+        private String city;
+        private double value;
 
+        public Query3Result(long id, int position2016, int position2017, String country, String city, double value) {
+            this.id = id;
+            this.position2016 = position2016;
+            this.position2017 = position2017;
+            this.country = country;
+            this.city = city;
+            this.value = value;
+        }
     }
 }

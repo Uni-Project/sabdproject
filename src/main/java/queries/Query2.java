@@ -88,7 +88,7 @@ public class Query2 {
     private static class Query2Result implements Serializable {
         private long id;
 
-        private String nation;
+        private String country;
         private int year;
         private int month;
 
@@ -97,9 +97,9 @@ public class Query2 {
         private double stdev;
         private double mean;
 
-        public Query2Result(long id, String nation, int year, int month, double max, double min, double stdev, double mean) {
+        public Query2Result(long id, String country, int year, int month, double max, double min, double stdev, double mean) {
             this.id = id;
-            this.nation = nation;
+            this.country = country;
             this.year = year;
             this.month = month;
             this.max = max;
