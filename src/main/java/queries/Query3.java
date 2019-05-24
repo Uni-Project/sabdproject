@@ -111,7 +111,7 @@ public class Query3 {
     public static List<Integer> getIndex(List<Tuple2<String, Double>> l1, List<Tuple2<String, Double>> l2){
 
         List<Integer> indici = new ArrayList<Integer>();
-        for(int i = 0; i <= 3; i++) {
+        for(int i = 0; i < 3; i++) {
             Tuple2<String, Double> t1 = l1.get(i);
             for(int j = 0; j < l2.size(); j++) {
                 Tuple2<String, Double> t2 = l2.get(j);
