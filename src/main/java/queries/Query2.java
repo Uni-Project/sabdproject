@@ -9,6 +9,7 @@ import spire.random.rng.Serial;
 import utils.AttributesParser;
 import utils.DetectionParser;
 import utils.HDFSWriter;
+import utils.Query2Result;
 
 import java.io.Serializable;
 import java.lang.Double;
@@ -83,30 +84,6 @@ public class Query2 {
 
         spark.stop();
 
-    }
-
-    private static class Query2Result implements Serializable {
-        private long id;
-
-        private String country;
-        private int year;
-        private int month;
-
-        private double max;
-        private double min;
-        private double stdev;
-        private double mean;
-
-        public Query2Result(long id, String country, int year, int month, double max, double min, double stdev, double mean) {
-            this.id = id;
-            this.country = country;
-            this.year = year;
-            this.month = month;
-            this.max = max;
-            this.min = min;
-            this.stdev = stdev;
-            this.mean = mean;
-        }
     }
 
 }

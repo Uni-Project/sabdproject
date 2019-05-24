@@ -1,13 +1,19 @@
 package queries;
 
+import com.google.gson.Gson;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import scala.Serializable;
 import scala.Tuple2;
 import scala.Tuple3;
 import scala.Tuple4;
 import utils.DetectionParser;
+import utils.HDFSWriter;
+import utils.Query1Result;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Query1 {
 
@@ -33,15 +39,26 @@ public class Query1 {
                 .reduceByKey((x, y) -> x+y)
                 .filter(days -> days._2 == 3)
                 .mapToPair(tuple -> new Tuple2<>(tuple._1._1(), tuple._1._3()))
-                .reduceByKey((t1, t2) -> t1 + ", " + t2);
+                .reduceByKey((t1, t2) -> t1 + "," + t2)
+                .cache();
 
         query1.coalesce(1).saveAsTextFile("hdfs://master:54310/query1_raw");
+
+        long id = 1;
+        List<Query1Result> results = new ArrayList<>();
+        List<Tuple2<Integer, String>> query1Listed = query1.collect();
+
+        for (int i=0; i<query1Listed.size(); i++) {
+            Query1Result res = new Query1Result(id, query1Listed.get(i)._1, Arrays.asList(query1Listed.get(i)._2.split(",")));
+            results.add(res);
+            id++;
+        }
+
+        Gson jsonResult = new Gson();
+        HDFSWriter.write(jsonResult.toJson(results), "hdfs://master:54310/query1/query1.json");
 
         spark.stop();
 
     }
 
-    private class query1Result implements Serializable {
-
-    }
 }

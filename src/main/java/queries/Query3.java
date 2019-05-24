@@ -10,6 +10,7 @@ import scala.Tuple4;
 import utils.AttributesParser;
 import utils.DetectionParser;
 import utils.HDFSWriter;
+import utils.Query3Result;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -101,7 +102,7 @@ public class Query3 {
             }
         }
         Gson jsonResult = new Gson();
-        HDFSWriter.write(jsonResult.toJson(results), "hdfs://master:54310/query3.json");
+        HDFSWriter.write(jsonResult.toJson(results), "hdfs://master:54310/query3/query3.json");
 
 
         spark.stop();
@@ -122,24 +123,5 @@ public class Query3 {
             }
         }
         return indici;
-    }
-
-    private static class Query3Result implements Serializable {
-        private long id;
-
-        private int position2016;
-        private int position2017;
-        private String country;
-        private String city;
-        private double value;
-
-        public Query3Result(long id, int position2016, int position2017, String country, String city, double value) {
-            this.id = id;
-            this.position2016 = position2016;
-            this.position2017 = position2017;
-            this.country = country;
-            this.city = city;
-            this.value = value;
-        }
     }
 }

@@ -55,9 +55,9 @@ public class Preprocess {
                         .withColumnRenamed(columns[j], files.get(i).getName().split(regexPattern)[0]);
 
                 if (tmp == null)
-                    tmp = splitted;
+                    tmp = splitted.cache();
                 else
-                    tmp = tmp.union(splitted);
+                    tmp = tmp.union(splitted).cache();
             }
 
             /*

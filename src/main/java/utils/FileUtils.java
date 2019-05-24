@@ -2,8 +2,9 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class FileUtils {
+public class FileUtils implements Serializable {
     private String name;
     private String path;
 

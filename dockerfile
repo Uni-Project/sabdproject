@@ -19,6 +19,14 @@ RUN cd /usr/local && ln -s ./scala-2.12.8 scala
 ENV SCALA_HOME /usr/local/scala
 ENV PATH $PATH:$SCALA_HOME/bin
 
+# add hbase
+RUN wget http://it.apache.contactlab.it/hbase/2.1.4/hbase-2.1.4-bin.tar.gz; tar -zxf hbase-2.1.4-bin.tar.gz -C /usr/local/ ; rm hbase-2.1.4-bin.tar.gz
+RUN cd /usr/local && ln -s ./hbase-2.1.4 hbase
+ENV HBASE_HOME /usr/local/hbase
+RUN cd $HBASE_HOME/conf; mv hbase-site.xml hbase-site.xml-old;
+ADD data/hbase-site.xml /user/local/hbase/conf
+RUN cd $HBASE_HOME/conf; echo "export JAVA_HOME=$JAVA_HOME" >> hbase-env.sh;
+
 
 # expose port for nifi web interface
 EXPOSE 8080
