@@ -75,10 +75,14 @@ public class Query3 {
                 })
                 .reduceByKey((t1, t2) -> {
                     List<Integer> index = new ArrayList<>();
+                    List<Tuple2<String, Double>> top3 = new ArrayList<>();
                     if (t1._1.get(0) == 2017) {
                         index = getIndex(t1._2, t2._2);
                     } else index = getIndex(t2._2, t1._2);
-                    return new Tuple2<>(index, t1._2);
+                    top3.add(t1._2.get(0));
+                    top3.add(t1._2.get(1));
+                    top3.add(t1._2.get(2));
+                    return new Tuple2<>(index, top3);
                 }).cache();
 
         query3.coalesce(1).saveAsTextFile("hdfs://master:54310/query3_raw");
@@ -97,7 +101,7 @@ public class Query3 {
             for(int j = 0; j < l2.size(); j++) {
                 Tuple2<String, Double> t2 = l2.get(j);
                 if(t1._1.equals(t2._1)) {
-                    indici.add(l2.indexOf(t2));
+                    indici.add(l2.indexOf(t2)+1);
                     System.out.println(indici);
                 }
             }
