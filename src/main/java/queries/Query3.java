@@ -108,6 +108,6 @@ public class Query3 {
     private class Query3Result implements Serializable {
         private long id;
 
-        
+
     }
 }

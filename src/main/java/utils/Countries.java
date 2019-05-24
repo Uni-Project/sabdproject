@@ -1,6 +1,7 @@
 package utils;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class Countries {
                 return countryNames.get(i);
         }
 
-        return ""; //Not happening... D:
+        return ""; //Not happening...entire world covered
 
     }
 
@@ -64,7 +65,14 @@ public class Countries {
         if (country.isEmpty())
             return 0;
 
-        return 1;
+        List<String> countryNames = Arrays.asList("Israele", "Usa", "North America", "South America", "Europe", "Africa", "Australia", "Asia", "Asia", "Antartide");
+        Integer[] UTCs = {3, -7, -7, -4, 5, 2, 9, 6, 7, 0}; //This data is very approximate!
+
+        for (int i=0; i<countryNames.size(); i++)
+            if (countryNames.get(i).equals(country))
+                return UTCs[i];
+
+        return 0;
     }
 
 }
