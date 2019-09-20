@@ -15,7 +15,6 @@ public class Attributes {
             this.lat = Double.parseDouble(lat);
             this.lon = Double.parseDouble(lon);
             this.country = getCountryByCoord(this.lat, this.lon);
-            this.continent = getContinentByCoord(this.lat, this.lon);
             this.UTC = calculateUTC(this.country);
         } catch (Exception ex) {
             this.lat = 0.0;
@@ -23,19 +22,13 @@ public class Attributes {
         }
     }
 
-    private String getContinentByCoord(Double lat, Double lon) {
-        return "CIAO";
-    }
 
-    private String getCountryByCoord(Double lat, Double lon) {
-        if (lon < 0)
-            return "USA";
-        return "ISRAELE";
+    private String getCountryByCoord(Double lon, Double lat) {
+        return Countries.getCountry(lat, lon);
     }
 
     private int calculateUTC (String country) {
-        if (country.equals("USA")) return -7;
-        return 3;
+        return Countries.getUTC(country);
     }
 
     public int getUtc() {

@@ -7,7 +7,7 @@ public class Validation {
         double valueMin;
         switch (type) {
             case "humidity":
-                valueMax = 100.0; //umidità espressa in percentuale
+                valueMax = 100.0;
                 valueMin = 0.0;
                 break;
             case "temperature":

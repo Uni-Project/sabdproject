@@ -15,7 +15,7 @@ public class Preprocess {
     public static void main(String[] args) {
 
         String regexPattern = "\\.(?=[^\\.]+$)";
-        String outputhFolder = "hdfs://master:54310/PreProcessed";
+        String outputhFolder = "hdfs://master:54310/PreProcNew";
 
         //old code...it was a porting from local files to hdfs files
         //-------------------------------------------------------
@@ -29,15 +29,19 @@ public class Preprocess {
         SparkSession spark = SparkSession.builder()
                 .appName("Preprocessing and Validation")
                 .master("local")
+                .config("spark.hadoop.validateOutputSpecs","false")
                 .config("com.databricks.spark.csv", "true")
                 .config("spark.debug.maxToStringFields", "10000")
                 .getOrCreate();
-        spark.sparkContext().setLogLevel("ERROR");
+        //spark.sparkContext().setLogLevel("ERROR");
 
         /*
          *   Preprocessing: PART 1
          *   Adjust dataset to improve future queries
          */
+
+        long start = System.currentTimeMillis();
+
         Dataset<Row> tmp = null;
         String[] columns;
         for (int i=0; i<files.size(); i++) {
@@ -55,9 +59,9 @@ public class Preprocess {
                         .withColumnRenamed(columns[j], files.get(i).getName().split(regexPattern)[0]);
 
                 if (tmp == null)
-                    tmp = splitted.cache();
+                    tmp = splitted;
                 else
-                    tmp = tmp.union(splitted).cache();
+                    tmp = tmp.union(splitted);
             }
 
             /*
@@ -73,6 +77,10 @@ public class Preprocess {
                     .saveAsTextFile(outputhFolder + "/" + files.get(i).getName().split(regexPattern)[0]);
             tmp = null;
         }
+
+        long stop = System.currentTimeMillis();
+
+        System.out.println("ELAPSED TIME: ----> " + (stop-start)/1000);
 
         spark.stop();
     }
